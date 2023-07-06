@@ -7,6 +7,7 @@ import { MongoClient } from "mongodb";
 import Joi from "joi";
 import { getParticipants, signUp } from "../controllers/sign-up.js";
 import { login } from "../controllers/sign-in.js";
+import { input } from "../controllers/input.js";
 
 const app = express();
 app.use(cors());
@@ -23,9 +24,8 @@ mongoClient.connect()
 
 //End points
 app.post("/sing-up", signUp);
-app.get("/sing-up", getParticipants);
-
 app.post("/login", login);
+app.post('/input', input);
 
  const PORT=5000
  app.listen(PORT, () => console.log(`Servidor Quiz rodando na porta ${PORT}`));
