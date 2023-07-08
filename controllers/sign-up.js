@@ -23,11 +23,3 @@ export async function signUp(req, res){
         res.send(error)
     }
 }
-export async function getParticipants(req, res){
-    try {
-        const data = await db.collection("users").find().toArray();
-        res.send(data);
-    } catch (error) {
-        res.send(error).status(500)
-    }
-}

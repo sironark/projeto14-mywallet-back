@@ -16,11 +16,13 @@ export async function login(req, res){
     try {
         const user = await db.collection('users').findOne({ email });
         if(!user) return res.sendStatus(404);
+
         if(!bcrypt.compareSync(password, user.password)) return res.sendStatus(401);
         const token = uuid();
         await db.collection('sessions').insertOne({userId: user._id, token})
-
-        res.sendStatus(200);
+        
+        const resUser = {email: user.email, name: user.name,token: token}
+        res.send(resUser).sendStatus(200);
 
     } catch (error) {
         res.sendStatus(500)
