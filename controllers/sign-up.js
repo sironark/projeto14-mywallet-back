@@ -12,7 +12,7 @@ export async function signUp(req, res){
     }
 
     try {
-        const userCreated = await db.collection("users").findOne({name});
+        const userCreated = await db.collection("users").findOne({email});
         if(userCreated) return res.status(409).send("Nome já cadastrado");
         
         const passwordHash = bcrypt.hashSync(password, 10);
