@@ -2,7 +2,7 @@ import { db } from "../src/app.js";
 
 export async function transactions(req, res){
     const {authorization} = req.headers;
-    const {email} = req.body;
+    const {email} = req.query;
     
     const token = authorization?.replace("Bearer ","");
     //console.log(req.headers.authorization)
