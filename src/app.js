@@ -27,8 +27,8 @@ mongoClient.connect()
 //End points
 app.post("/sing-up", signUp);
 app.post("/login", login);
-app.post('/input', input);
-app.get('/transactions', transactions)
+app.post("/input", input);
+app.get("/transactions",transactions)
 
 //Port connection
  const PORT=5000

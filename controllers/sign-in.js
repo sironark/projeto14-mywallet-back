@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 
 export async function login(req, res){
     const {email, password} = req.body;
+    const token = uuid();
 
     const validation = schemaLogin.validate(req.body, {abortEarly: false});
     if(validation.error){
@@ -18,11 +19,10 @@ export async function login(req, res){
         if(!user) return res.sendStatus(404);
 
         if(!bcrypt.compareSync(password, user.password)) return res.sendStatus(401);
-        const token = uuid();
         await db.collection('sessions').insertOne({userId: user._id, token})
         
-        const resUser = {email: user.email, name: user.name,token: token}
-        res.send(resUser).sendStatus(200);
+        const resUser = {email: user.email, name: user.name,token}
+        res.send(resUser);
 
     } catch (error) {
         res.sendStatus(500)

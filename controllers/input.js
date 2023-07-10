@@ -26,9 +26,9 @@ export async function input(req, res){
             type 
         }
         await db.collection("inputs").insertOne(inTransaction)
-        res.send(req.body).sendStatus(200)
+        res.send(inTransaction)
         
     } catch (error) {
-        
+        res.sendStatus(500)
     }
 }
