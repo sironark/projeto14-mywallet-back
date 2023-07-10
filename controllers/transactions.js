@@ -9,7 +9,7 @@ export async function transactions(req, res){
     try {
         const session = await db.collection("sessions").find({token});
         if (!session) return res.sendStatus(401);
-        const transactions = await db.collection("inputs").find().toArray()
+        const transactions = await db.collection("inputs").find({email}).toArray()
         res.send(transactions)
 
     } catch (error) {
